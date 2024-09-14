@@ -85,7 +85,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6952375903354553274}
   - component: {fileID: 3029606983175517641}
-  - component: {fileID: -136790395949940791}
   m_Layer: 5
   m_Name: Home Button Text And Icon
   m_TagString: Untagged
@@ -138,18 +137,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &-136790395949940791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6835803785099486933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5737ea9b2524b05ab692bf4611a16e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8697849424739378954
 GameObject:
   m_ObjectHideFlags: 0

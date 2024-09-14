@@ -21,7 +21,6 @@ public class RobotControls : MonoBehaviour
     float x_final;
     float y_final;
 
-
     void Start()
     {
         robotController = FindObjectOfType<RobotController>();
@@ -34,7 +33,7 @@ public class RobotControls : MonoBehaviour
     {
         if (Mathf.Abs(x_final) > 0 || Mathf.Abs(y_final) > 0)
         {
-            robotController.Move(0, y_final, x_final, .5f);
+            robotController.Move(y_final, 0, -x_final, .5f);
         }
 
         Invoke("UpdateRobot", .5f);
@@ -47,16 +46,16 @@ public class RobotControls : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         //Game Controller Input
-        float x_joystick = Input.GetAxis("JoystickAxis1");
-        float y_joystick = -Input.GetAxis("JoystickAxis2");
+        //float x_joystick = Input.GetAxis("JoystickAxis1");
+        //float y_joystick = -Input.GetAxis("JoystickAxis2");
 
         //Virtual Joystick Controller Input
         float x_virtual_joystick = xrhands.JoystickX;
         float y_virtual_joystick = xrhands.JoystickY;
 
         //Final Controller Input
-        x_final = x + x_joystick + x_virtual_joystick;
-        y_final = z + y_joystick + y_virtual_joystick;
+        x_final = x /*+ x_joystick*/ + x_virtual_joystick;
+        y_final = z /*+ y_joystick*/ + y_virtual_joystick;
 
         //Clamp Input Values between -1 and 1
         x_final = Mathf.Clamp(x_final, -1, 1);
