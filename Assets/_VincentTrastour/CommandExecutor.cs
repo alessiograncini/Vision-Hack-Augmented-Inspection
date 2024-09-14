@@ -178,7 +178,7 @@ public class CommandExecutor : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Unknown command: " + command);
+            Debug.Log("Unknown command: " + command);
         }
     }
 }
