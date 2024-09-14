@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Unity.Jobs;
 using Unity.Collections;
@@ -31,7 +32,7 @@ public class PointCloudVisualizer : MonoBehaviour
         main.loop = false;
         main.playOnAwake = false;
         main.maxParticles = maxParticles;
-        main.simulationSpace = ParticleSystemSimulationSpace.World;
+        main.simulationSpace = ParticleSystemSimulationSpace.Local;
 
         var emission = particleSystem.emission;
         emission.enabled = false;
@@ -40,7 +41,8 @@ public class PointCloudVisualizer : MonoBehaviour
         shape.enabled = false;
 
         // Create and set up the particle material
-        particleMaterial = new Material(Shader.Find("Particles/Standard Unlit"));
+        particleMaterial = new Material(Shader.Find("TextMeshPro/Mobile/Distance Field"));
+        // particleMaterial = new Material(Shader.Find("Particles/Standard Unlit"));
         particleMaterial.SetColor("_EmissionColor", Color.white);
 
         var renderer = particleSystem.GetComponent<ParticleSystemRenderer>();
@@ -48,8 +50,9 @@ public class PointCloudVisualizer : MonoBehaviour
         renderer.renderMode = ParticleSystemRenderMode.Billboard;
 
         particles = new ParticleSystem.Particle[maxParticles];
+        
     }
-
+    
     private IEnumerator UpdatePointCloudRoutine()
     {
         while (true)
