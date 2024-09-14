@@ -180,6 +180,7 @@ public class XRHands : MonoBehaviour
                 }
                 else
                 {
+                    handOverJoystick = false;
                     joystick.localScale += (joystickStartScale - joystick.localScale) * Time.deltaTime;
                     joystickMeshRenderer.material = this.defaultJoystickMaterial;
                 }
