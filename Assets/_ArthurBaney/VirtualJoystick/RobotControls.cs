@@ -97,4 +97,22 @@ public class RobotControls : MonoBehaviour
         rss.BackLeftUpperLegAngle = -legRotation;
         rss.BackRightUpperLegAngle = legRotation;
     }
+
+    public float GetFinalXInput()
+    {
+        float x = Input.GetAxis("Horizontal");
+        float x_joystick = Input.GetAxis("JoystickAxis1");
+        float x_virtual_joystick = xrhands.JoystickX;
+        float x_final = x + x_joystick + x_virtual_joystick;
+        return Mathf.Clamp(x_final, -1, 1);
+    }
+
+    public float GetFinalYInput()
+    {
+        float z = Input.GetAxis("Vertical");
+        float y_joystick = -Input.GetAxis("JoystickAxis2");
+        float y_virtual_joystick = xrhands.JoystickY;
+        float y_final = z + y_joystick + y_virtual_joystick;
+        return Mathf.Clamp(y_final, -1, 1);
+    }
 }

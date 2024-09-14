@@ -53,9 +53,9 @@ MonoBehaviour:
         m_Untranslated: You might have some old assets you'd like to bring into your
           shared world app. Some materials or objects might not be fully supported
           for different <a href="https://docs.unity3d.com/Packages/com.unity.xr.core-utils@2.4/manual/capability-profile.html">capability
-          profiles</a>. You can inspect them against <b>visionOS MR - Full Immersive, visionOS MR - Volume,
-          VR</b> using Scene Validation tools in the Inspector window to auto-fix
-          them.
+          profiles</a>. You can inspect them against <b>visionOS MR - Full Immersive,
+          visionOS MR - Volume, VR</b> using Scene Validation tools in the Inspector
+          window to auto-fix them.
       m_Tutorial: {fileID: 0}
       m_Image: {fileID: 0}
       m_Video: {fileID: 0}
@@ -148,22 +148,3 @@ MonoBehaviour:
       m_Calls: []
   m_NextButton: Next
   m_DoneButton: Done
---- !u!114 &2863615264803319473
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 406a8e9ef00db4cdf893b6ec83a201f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Completed:
-    m_PersistentCalls:
-      m_Calls: []
-  Invalidated:
-    m_PersistentCalls:
-      m_Calls: []
-  isTesting: 0
