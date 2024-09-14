@@ -6,8 +6,7 @@ public class RobotControls : MonoBehaviour
 {
     public float rotateSpeed = 90; //Degrees per second
     public float moveSpeed = 1; //Meters per second
-
-    RobotStateSync rss;
+    
 
     float legRotation;
     float legRotationDir = 1;
@@ -25,7 +24,6 @@ public class RobotControls : MonoBehaviour
     {
         robotController = FindObjectOfType<RobotController>();
         xrhands = FindObjectOfType<XRHands>();
-        rss = GetComponent<RobotStateSync>();
         Invoke("UpdateRobot", .5f);
     }
 
@@ -108,11 +106,7 @@ public class RobotControls : MonoBehaviour
                 legRotation += Mathf.Min(legSpeed * Time.deltaTime, (-legRotation));
             }
         }
-
-        rss.FrontLeftUpperLegAngle = legRotation;
-        rss.FrontRightUpperLegAngle = -legRotation;
-        rss.BackLeftUpperLegAngle = -legRotation;
-        rss.BackRightUpperLegAngle = legRotation;
+        
     }
 
     public float GetFinalXInput()

@@ -1,5 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 
 public interface ICommand
 {
@@ -15,6 +17,7 @@ public class MoveForwardCommand : ICommand
             Debug.LogError("RobotController not found.");
             return;
         }
+
         RobotController robotController = Object.FindObjectOfType<RobotController>();
         robotController.MoveForward();
         Debug.Log("Executing Move Forward");
@@ -31,6 +34,7 @@ public class MoveBackwardCommand : ICommand
             Debug.LogError("RobotController not found.");
             return;
         }
+
         RobotController robotController = Object.FindObjectOfType<RobotController>();
         robotController.MoveBackward();
         Debug.Log("Executing Move Backward");
@@ -47,6 +51,7 @@ public class TurnLeftCommand : ICommand
             Debug.LogError("RobotController not found.");
             return;
         }
+
         RobotController robotController = Object.FindObjectOfType<RobotController>();
         robotController.RotateLeft();
         Debug.Log("Executing Turn Left");
@@ -63,6 +68,7 @@ public class TurnRightCommand : ICommand
             Debug.LogError("RobotController not found.");
             return;
         }
+
         RobotController robotController = Object.FindObjectOfType<RobotController>();
         robotController.RotateRight();
         Debug.Log("Executing Turn Right");
@@ -79,6 +85,7 @@ public class StopCommand : ICommand
             Debug.LogError("RobotController not found.");
             return;
         }
+
         RobotController robotController = Object.FindObjectOfType<RobotController>();
         robotController.SendStop();
         Debug.Log("Executing Stop");
@@ -96,6 +103,7 @@ public class StartCommand : ICommand
             Debug.LogError("RobotController not found.");
             return;
         }
+
         RobotController robotController = Object.FindObjectOfType<RobotController>();
         robotController.SendStart();
         Debug.Log("Executing Start-=--==-=-=-=-==-");
@@ -106,6 +114,7 @@ public class StartCommand : ICommand
 public class LookAroundCommand : ICommand
 {
     private OpenAIService openAIService;
+    private string serverUrl = "http://192.168.1.225:5002/get_frame"; // Update this to match your server URL
 
     public LookAroundCommand(OpenAIService service)
     {
@@ -117,8 +126,28 @@ public class LookAroundCommand : ICommand
         Debug.Log("Executing Look Around");
         if (openAIService != null)
         {
-            // You can call the DescribeImage function from OpenAIService to get an image description if needed.
-            openAIService.StartCoroutine(openAIService.DescribeImage("https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg", (description) =>
+            openAIService.StartCoroutine(FetchAndProcessImage());
+        }
+    }
+
+    private IEnumerator FetchAndProcessImage()
+    {
+        using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(serverUrl))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("Failed to fetch image: " + www.error);
+                yield break;
+            }
+
+            Texture2D texture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+            byte[] jpgData = texture.EncodeToJPG();
+            string base64Image = System.Convert.ToBase64String(jpgData);
+
+            // Now use the base64Image with the OpenAI service
+            openAIService.StartCoroutine(openAIService.DescribeImage(base64Image, (description) =>
             {
                 Debug.Log("Image description: " + description);
                 // You could display the description in the UI or handle it as needed
@@ -135,6 +164,7 @@ public class LookAroundCommand : ICommand
                             {
                                 audioSource = openAIService.gameObject.AddComponent<AudioSource>();
                             }
+
                             audioSource.clip = audioClip;
                             audioSource.Play();
                         }
@@ -182,3 +212,44 @@ public class CommandExecutor : MonoBehaviour
         }
     }
 }
+
+/*
+public void Execute()
+{
+    Debug.Log("Executing Look Around");
+    if (openAIService != null)
+    {
+        // You can call the DescribeImage function from OpenAIService to get an image description if needed.
+        openAIService.StartCoroutine(openAIService.DescribeImage("https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg", (description) =>
+        {
+            Debug.Log("Image description: " + description);
+            // You could display the description in the UI or handle it as needed
+            // Call the TTS service to generate speech from the description
+            if (!string.IsNullOrEmpty(description))
+            {
+                openAIService.StartCoroutine(openAIService.GenerateSpeech(description, "alloy", (audioClip) =>
+                {
+                    if (audioClip != null)
+                    {
+                        // Play the generated audio
+                        AudioSource audioSource = openAIService.GetComponent<AudioSource>();
+                        if (audioSource == null)
+                        {
+                            audioSource = openAIService.gameObject.AddComponent<AudioSource>();
+                        }
+                        audioSource.clip = audioClip;
+                        audioSource.Play();
+                    }
+                    else
+                    {
+                        Debug.LogError("Failed to generate speech.");
+                    }
+                }));
+            }
+        }));
+    }
+}
+}
+
+
+*/
