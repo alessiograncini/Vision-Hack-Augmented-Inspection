@@ -19,6 +19,14 @@ public class RobotController : MonoBehaviour
     [SerializeField] private float rotationSpeed = 1f;
     [SerializeField] private float defaultDuration = 1f;
 
+    // Public methods to access private fields
+    public float GetForwardSpeed() => forwardSpeed;
+    public float GetBackwardSpeed() => backwardSpeed;
+    public float GetLeftSpeed() => leftSpeed;
+    public float GetRightSpeed() => rightSpeed;
+    public float GetRotationSpeed() => rotationSpeed;
+    public float GetDefaultDuration() => defaultDuration;
+
     private IEnumerator SendCommand(string command, VelocityArgs args = null)
     {
         string url = baseUrl + "/command";

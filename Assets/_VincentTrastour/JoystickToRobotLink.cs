@@ -31,12 +31,18 @@ public class JoystickToRobotLink : MonoBehaviour
         float x_final = robotControls.GetFinalXInput();
         float y_final = robotControls.GetFinalYInput();
 
+        // Get movement settings from RobotController
+        float forwardSpeed = robotController.GetForwardSpeed();
+        float rightSpeed = robotController.GetRightSpeed();
+        float rotationSpeed = robotController.GetRotationSpeed();
+        float defaultDuration = robotController.GetDefaultDuration();
+
         // Map joystick inputs to robot movement
-        float v_x = y_final * robotController.forwardSpeed;
-        float v_y = x_final * robotController.rightSpeed;
-        float v_rot = x_final * robotController.rotationSpeed;
+        float v_x = y_final * forwardSpeed;
+        float v_y = x_final * rightSpeed;
+        float v_rot = x_final * rotationSpeed;
 
         // Send movement command to RobotController
-        robotController.CustomMove(v_x, v_y, v_rot, robotController.defaultDuration);
+        robotController.CustomMove(v_x, v_y, v_rot, defaultDuration);
     }
 }
