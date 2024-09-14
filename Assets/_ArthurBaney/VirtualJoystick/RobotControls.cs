@@ -16,10 +16,28 @@ public class RobotControls : MonoBehaviour
 
     XRHands xrhands;
 
+    RobotController robotController;
+
+    float x_final;
+    float y_final;
+
+
     void Start()
     {
+        robotController = FindObjectOfType<RobotController>();
         xrhands = FindObjectOfType<XRHands>();
         rss = GetComponent<RobotStateSync>();
+        Invoke("UpdateRobot", .5f);
+    }
+
+    void UpdateRobot()
+    {
+        if (Mathf.Abs(x_final) > 0 || Mathf.Abs(y_final) > 0)
+        {
+            robotController.Move(0, y_final, x_final, .5f);
+        }
+
+        Invoke("UpdateRobot", .5f);
     }
 
     void Update()
@@ -37,8 +55,8 @@ public class RobotControls : MonoBehaviour
         float y_virtual_joystick = xrhands.JoystickY;
 
         //Final Controller Input
-        float x_final = x + x_joystick + x_virtual_joystick;
-        float y_final = z + y_joystick + y_virtual_joystick;
+        x_final = x + x_joystick + x_virtual_joystick;
+        y_final = z + y_joystick + y_virtual_joystick;
 
         //Clamp Input Values between -1 and 1
         x_final = Mathf.Clamp(x_final, -1, 1);
