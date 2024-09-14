@@ -33,7 +33,7 @@ public class RobotControls : MonoBehaviour
     {
         if (Mathf.Abs(x_final) > 0 || Mathf.Abs(y_final) > 0)
         {
-            robotController.Move(0, y_final, x_final, .5f);
+            robotController.Move(y_final, 0, -x_final, .5f);
         }
 
         Invoke("UpdateRobot", .5f);
