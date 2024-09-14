@@ -4,13 +4,13 @@ using UnityEngine.XR.Hands;
 using UnityEngine.XR.Management;
 #endif
 
+
 namespace PolySpatial.Samples
 {
     public class PinchToAct : MonoBehaviour
     {
         [SerializeField]
         RobotController m_RobotController;
-        
 
         [SerializeField]
         Transform m_PolySpatialCameraTransform;
@@ -123,7 +123,8 @@ namespace PolySpatial.Samples
                 {
                     if (!activeFlag)
                     {
-                        m_RobotController.MoveRobotForward();
+                        // example 
+                        m_RobotController.SendStart();
                         activeFlag = true;
                     }
                 }
