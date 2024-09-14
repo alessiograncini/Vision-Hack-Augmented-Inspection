@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 // Requires hands package and VisionOSHandExtensions which is only compiled for visionOS and Editor
 #if UNITY_INCLUDE_XR_HANDS && (UNITY_VISIONOS || UNITY_EDITOR)
@@ -19,7 +20,16 @@ namespace PolySpatial.Samples
         HandGameObjects m_LeftHandGameObjects;
         HandGameObjects m_RightHandGameObjects;
 
+        public static Dictionary<int, Transform> LeftHandJoints;
+        public static Dictionary<int, Transform> RightHandJoints;
+
         static readonly List<XRHandSubsystem> k_SubsystemsReuse = new();
+
+        private void Awake()
+        {
+            LeftHandJoints = new Dictionary<int, Transform>();
+            RightHandJoints = new Dictionary<int, Transform>();
+        }
 
         protected void OnEnable()
         {
@@ -215,6 +225,13 @@ namespace PolySpatial.Samples
                     line.SetPositions(s_LinePointsReuse);
 
                     m_JointVisuals[jointIndex] = jointVisuals;
+
+                    TextMeshProUGUI text = jointVisualsObject.GetComponentInChildren<TextMeshProUGUI>();
+                    text.text = "jointIndex: " + jointIndex;
+                    if (handedness == Handedness.Left)
+                        HandVisualizer.LeftHandJoints.Add(jointIndex, jointVisualsObject.transform);
+                    if (handedness == Handedness.Right)
+                        HandVisualizer.RightHandJoints.Add(jointIndex, jointVisualsObject.transform);
                 }
 
                 m_JointVisualsParent = new GameObject();
