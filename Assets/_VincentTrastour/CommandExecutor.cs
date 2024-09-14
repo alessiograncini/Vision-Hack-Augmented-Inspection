@@ -10,6 +10,13 @@ public class MoveForwardCommand : ICommand
 {
     public void Execute()
     {
+        if (Object.FindObjectOfType<RobotController>() == null)
+        {
+            Debug.LogError("RobotController not found.");
+            return;
+        }
+        RobotController robotController = Object.FindObjectOfType<RobotController>();
+        robotController.MoveForward();
         Debug.Log("Executing Move Forward");
         // Add your movement logic here
     }
@@ -19,6 +26,13 @@ public class MoveBackwardCommand : ICommand
 {
     public void Execute()
     {
+        if (Object.FindObjectOfType<RobotController>() == null)
+        {
+            Debug.LogError("RobotController not found.");
+            return;
+        }
+        RobotController robotController = Object.FindObjectOfType<RobotController>();
+        robotController.MoveBackward();
         Debug.Log("Executing Move Backward");
         // Add your movement logic here
     }
@@ -28,6 +42,13 @@ public class TurnLeftCommand : ICommand
 {
     public void Execute()
     {
+        if (Object.FindObjectOfType<RobotController>() == null)
+        {
+            Debug.LogError("RobotController not found.");
+            return;
+        }
+        RobotController robotController = Object.FindObjectOfType<RobotController>();
+        robotController.RotateLeft();
         Debug.Log("Executing Turn Left");
         // Add your turning logic here
     }
@@ -37,6 +58,13 @@ public class TurnRightCommand : ICommand
 {
     public void Execute()
     {
+        if (Object.FindObjectOfType<RobotController>() == null)
+        {
+            Debug.LogError("RobotController not found.");
+            return;
+        }
+        RobotController robotController = Object.FindObjectOfType<RobotController>();
+        robotController.RotateRight();
         Debug.Log("Executing Turn Right");
         // Add your turning logic here
     }
@@ -46,8 +74,31 @@ public class StopCommand : ICommand
 {
     public void Execute()
     {
+        if (Object.FindObjectOfType<RobotController>() == null)
+        {
+            Debug.LogError("RobotController not found.");
+            return;
+        }
+        RobotController robotController = Object.FindObjectOfType<RobotController>();
+        robotController.SendStop();
         Debug.Log("Executing Stop");
         // Add your stopping logic here
+    }
+}
+
+public class StartCommand : ICommand
+{
+    public void Execute()
+    {
+        if (Object.FindObjectOfType<RobotController>() == null)
+        {
+            Debug.LogError("RobotController not found.");
+            return;
+        }
+        RobotController robotController = Object.FindObjectOfType<RobotController>();
+        robotController.SendStart();
+        Debug.Log("Executing Start");
+        // Add your starting logic here
     }
 }
 
@@ -112,6 +163,7 @@ public class CommandExecutor : MonoBehaviour
             { "left", new TurnLeftCommand() },
             { "right", new TurnRightCommand() },
             { "stop", new StopCommand() },
+            { "start", new StartCommand() },
             { "look", new LookAroundCommand(openAIService) }
         };
     }
