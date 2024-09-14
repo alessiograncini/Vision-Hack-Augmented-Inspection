@@ -90,6 +90,7 @@ public class StartCommand : ICommand
 {
     public void Execute()
     {
+        Debug.Log("Executing Start-=--==-=-=-=-==-");
         if (Object.FindObjectOfType<RobotController>() == null)
         {
             Debug.LogError("RobotController not found.");
@@ -97,7 +98,7 @@ public class StartCommand : ICommand
         }
         RobotController robotController = Object.FindObjectOfType<RobotController>();
         robotController.SendStart();
-        Debug.Log("Executing Start");
+        Debug.Log("Executing Start-=--==-=-=-=-==-");
         // Add your starting logic here
     }
 }
