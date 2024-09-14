@@ -97,7 +97,6 @@ public class StartCommand : ICommand
 {
     public void Execute()
     {
-        Debug.Log("Executing Start-=--==-=-=-=-==-");
         if (Object.FindObjectOfType<RobotController>() == null)
         {
             Debug.LogError("RobotController not found.");
@@ -106,7 +105,6 @@ public class StartCommand : ICommand
 
         RobotController robotController = Object.FindObjectOfType<RobotController>();
         robotController.SendStart();
-        Debug.Log("Executing Start-=--==-=-=-=-==-");
         // Add your starting logic here
     }
 }
@@ -132,6 +130,7 @@ public class LookAroundCommand : ICommand
 
     private IEnumerator FetchAndProcessImage()
     {
+
         using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(serverUrl))
         {
             yield return www.SendWebRequest();
@@ -142,14 +141,13 @@ public class LookAroundCommand : ICommand
                 yield break;
             }
 
-            Texture2D texture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+            Texture2D texture = DownloadHandlerTexture.GetContent(www);
             byte[] jpgData = texture.EncodeToJPG();
             string base64Image = System.Convert.ToBase64String(jpgData);
 
             // Now use the base64Image with the OpenAI service
             openAIService.StartCoroutine(openAIService.DescribeImage(base64Image, (description) =>
             {
-                Debug.Log("Image description: " + description);
                 // You could display the description in the UI or handle it as needed
                 // Call the TTS service to generate speech from the description
                 if (!string.IsNullOrEmpty(description))
