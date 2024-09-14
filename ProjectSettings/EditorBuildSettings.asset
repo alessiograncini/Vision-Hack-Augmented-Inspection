@@ -11,9 +11,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleSceneUnbounded.unity
     guid: d49e913a117634cdd953337ffbb2080c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Samples/PolySpatial/Scenes/MixedReality.unity
     guid: 4062257bd31be4dc980c3241c72cef79
+  - enabled: 1
+    path: Assets/_ArthurBaney/VirtualJoystick/AVP Robot Control.unity
+    guid: 7b537ccc7d18d425f814aff597ec568c
   m_configObjects:
     UnityEditor.XR.VisionOS.VisionOSSettings: {fileID: 11400000, guid: 25e1f68848051c946b9048e8426e646c, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: bb65518a4a80049acbc5e85e70dbbee0, type: 2}
