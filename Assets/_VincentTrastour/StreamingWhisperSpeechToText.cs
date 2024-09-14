@@ -5,11 +5,12 @@ using System.Collections;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 
 public class StreamWhisperSpeechToText : MonoBehaviour
 {
-    public Text transcriptionText;  // UI Text to display the transcribed text
-    public Text commandText;  // UI Text to display the parsed command
+    public TextMeshPro transcriptionText;  // UI Text to display the transcribed text
+    public TextMeshPro commandText;  // UI Text to display the parsed command
     private OpenAIService openAIService;  // Reference to the OpenAIService
     private CommandExecutor commandExecutor;  // Reference to CommandExecutor
 

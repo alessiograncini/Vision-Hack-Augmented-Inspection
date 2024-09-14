@@ -15,7 +15,7 @@ public class OpenAIService : MonoBehaviour
     {
         string prompt = "You are a helpful assistant. Detect if there is a command in the user's message and respond accordingly. "
                         + "Here is the list of the commands we are waiting for: "
-                        + "'move forward', 'move backward', 'turn left', 'turn right', 'stop', 'look and tell me what you see'. "
+                        + "'move forward', 'move backward', 'turn left', 'turn right', 'stop', 'look and tell me what you see', 'start', 'stop'. "
                         + "Answer with just one word so I can use that as a command detection. If there is no command, answer with 'none'."
                         + "'start' = start, 'stop' = stop, 'move forward' = 'forward', 'move backward' = 'backward', 'turn left' = 'left', 'turn right' = 'right', 'look and tell me what you see' = 'look'.";
 
