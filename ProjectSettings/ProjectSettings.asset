@@ -140,7 +140,11 @@ PlayerSettings:
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
   bundleVersion: 0.1
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: -374473393521292908, guid: 91384b14c79fa804d924648a4e81b07c, type: 2}
+  - {fileID: 11400000, guid: d1b44b12dbc12554c862e577406554bd, type: 2}
+  - {fileID: 11400000, guid: bb65518a4a80049acbc5e85e70dbbee0, type: 2}
+  - {fileID: 11400000, guid: ac517bd71f33e472fa5c25448bc7a703, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -594,7 +598,8 @@ PlayerSettings:
   enableCrashReportAPI: 0
   cameraUsageDescription: 
   locationUsageDescription: 
-  microphoneUsageDescription: 
+  microphoneUsageDescription: Microphone access is required to control the robot
+    with voice commands.
   bluetoothUsageDescription: 
   macOSTargetOSVersion: 10.13.0
   switchNMETAOverride: 
@@ -960,6 +965,6 @@ PlayerSettings:
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
-  platformRequiresReadableAssets: 0
+  platformRequiresReadableAssets: 1
   virtualTexturingSupportEnabled: 0
   insecureHttpOption: 2
