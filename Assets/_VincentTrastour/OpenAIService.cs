@@ -17,7 +17,7 @@ public class OpenAIService : MonoBehaviour
                         + "Here is the list of the commands we are waiting for: "
                         + "'move forward', 'move backward', 'turn left', 'turn right', 'stop', 'look and tell me what you see'. "
                         + "Answer with just one word so I can use that as a command detection. If there is no command, answer with 'none'."
-                        + "'move forward' = 'forward', 'move backward' = 'backward', 'turn left' = 'left', 'turn right' = 'right', 'look and tell me what you see' = 'look'.";
+                        + "'start' = start, 'stop' = stop, 'move forward' = 'forward', 'move backward' = 'backward', 'turn left' = 'left', 'turn right' = 'right', 'look and tell me what you see' = 'look'.";
 
         string jsonRequestBody = JsonConvert.SerializeObject(new
         {
