@@ -122,11 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &126985915 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1223859535269613550, guid: fe806fa458ef84c93aebe78505dc4f71, type: 3}
-  m_PrefabInstance: {fileID: 8562623339130362600}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &359101125
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +564,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8ef3c1b5d904107a4735fb94645864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followObject: {fileID: 126985915}
 --- !u!4 &786099598
 Transform:
   m_ObjectHideFlags: 0
@@ -584,6 +578,50 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 359101129}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &850781310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 850781312}
+  - component: {fileID: 850781311}
+  m_Layer: 0
+  m_Name: HubInputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &850781311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850781310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb5737ea9b2524b05ab692bf4611a16e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &850781312
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850781310}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.1526882, y: -0.3927554, z: 0.4047029}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &877236177
@@ -776,7 +814,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8805378566288379837, guid: 18184386a48784570818c7a765714fb6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -1216,7 +1255,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -136790395949940791, guid: 18184386a48784570818c7a765714fb6, type: 3}
+    - {fileID: 8805378566288379837, guid: 18184386a48784570818c7a765714fb6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -1457,6 +1498,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5339232465026231105, guid: 458b109b64795469a905813a4f113a86, type: 3}
+      propertyPath: m_CurrentTrackingState
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8497185528949639217, guid: 458b109b64795469a905813a4f113a86, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8534758782039209092, guid: 458b109b64795469a905813a4f113a86, type: 3}
       propertyPath: m_ObjectToHide
       value: 
@@ -1477,7 +1526,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8497185528949639217, guid: 458b109b64795469a905813a4f113a86, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8668590483116225900, guid: 458b109b64795469a905813a4f113a86, type: 3}
     - {fileID: 3880444255318872231, guid: 458b109b64795469a905813a4f113a86, type: 3}
@@ -1652,3 +1702,4 @@ SceneRoots:
   - {fileID: 1897884922}
   - {fileID: 1999693017}
   - {fileID: 877236180}
+  - {fileID: 850781312}
