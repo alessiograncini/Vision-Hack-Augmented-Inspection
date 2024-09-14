@@ -940,7 +940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 601e41b61829847ffbde0eac53e484b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RobotController: {fileID: 0}
+  m_RobotController: {fileID: 1098333440}
   m_PolySpatialCameraTransform: {fileID: 0}
 --- !u!1001 &1174253161
 PrefabInstance:
