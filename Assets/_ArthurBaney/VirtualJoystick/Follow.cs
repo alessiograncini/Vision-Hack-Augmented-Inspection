@@ -17,12 +17,12 @@ public class Follow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GetAngularDistance(targetRotation, followObject.rotation.eulerAngles.y) > 15f)
+        if (GetAngularDistance(targetRotation, followObject.rotation.eulerAngles.y) > 45f)
         {
             targetRotation = followObject.rotation.eulerAngles.y;
         }
 
-        if (Vector3.Distance(target, followObject.position) > .15f)
+        if (Vector3.Distance(target, followObject.position) > .2f)
         {
             target = followObject.position;
         }

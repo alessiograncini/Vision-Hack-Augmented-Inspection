@@ -2,11 +2,11 @@ using UnityEngine;
 using TMPro;
 
 // Requires hands package and VisionOSHandExtensions which is only compiled for visionOS and Editor
-#if UNITY_INCLUDE_XR_HANDS && (UNITY_VISIONOS || UNITY_EDITOR)
+//#if UNITY_INCLUDE_XR_HANDS && (UNITY_VISIONOS || UNITY_EDITOR)
 using System.Collections.Generic;
 using UnityEngine.XR.Hands;
 using UnityEngine.XR.VisionOS;
-#endif
+//#endif
 
 namespace PolySpatial.Samples
 {
@@ -15,7 +15,7 @@ namespace PolySpatial.Samples
         [SerializeField]
         GameObject m_JointVisualsPrefab;
 
-#if UNITY_INCLUDE_XR_HANDS && (UNITY_VISIONOS || UNITY_EDITOR)
+//#if UNITY_INCLUDE_XR_HANDS && (UNITY_VISIONOS || UNITY_EDITOR)
         XRHandSubsystem m_Subsystem;
         HandGameObjects m_LeftHandGameObjects;
         HandGameObjects m_RightHandGameObjects;
@@ -352,6 +352,6 @@ namespace PolySpatial.Samples
                 }
             }
         }
-#endif
+//#endif
     }
 }
