@@ -7034,7 +7034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serverUrl: http://192.168.4.38:5002/get_frame
-  updateInterval: 5
+  updateInterval: 0.1
   displayImage: {fileID: 1780609854}
 --- !u!4 &1936511941
 Transform:
