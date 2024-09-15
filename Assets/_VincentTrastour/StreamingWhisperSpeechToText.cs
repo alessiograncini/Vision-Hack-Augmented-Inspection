@@ -58,7 +58,7 @@ public class StreamWhisperSpeechToText : MonoBehaviour
             transcriptionText.text = "Press Start Listening to begin...";
         }
     }
-
+    [ContextMenu("StartRecording")]
     public void StartRecording()
     {
         if (!isRecording)
@@ -79,6 +79,7 @@ public class StreamWhisperSpeechToText : MonoBehaviour
         }
     }
 
+    [ContextMenu("StopRecording")]
     public void StopRecording()
     {
         if (isRecording)
@@ -204,7 +205,6 @@ public class StreamWhisperSpeechToText : MonoBehaviour
         }
 
         var transcription = transcriptionTask.Result;
-        Debug.Log("Transcription RESULT: " + transcription);
 
         if (!string.IsNullOrEmpty(transcription))
         {
@@ -216,7 +216,6 @@ public class StreamWhisperSpeechToText : MonoBehaviour
 
                 if (!string.IsNullOrEmpty(parsedCommand))
                 {
-                    commandText.text = "Command: " + parsedCommand;
                     commandExecutor.ExecuteCommand(parsedCommand);  // Execute the command
                 }
                 else

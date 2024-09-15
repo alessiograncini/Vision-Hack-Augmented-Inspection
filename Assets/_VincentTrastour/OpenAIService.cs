@@ -35,8 +35,9 @@ public class OpenAIService : MonoBehaviour
     }
 
     // Function to describe an image
-    public IEnumerator DescribeImage(string imageUrl, System.Action<string> onComplete)
+    public IEnumerator DescribeImage(string base64Image, System.Action<string> onComplete)
     {
+
         string jsonRequestBody = JsonConvert.SerializeObject(new
         {
             model = "gpt-4o-mini",
@@ -47,15 +48,20 @@ public class OpenAIService : MonoBehaviour
                     role = "user",
                     content = new object[]
                     {
-                        new { type = "text", text = "What's in this image?" },
-                        new { type = "image_url", image_url = new { url = imageUrl } }
+                        new { type = "text", text = "What's in this image? be short" },
+                        new { type = "image_url", image_url = new { url = $"data:image/jpeg;base64,{base64Image}" } } // Updated to accept base64 string
                     }
                 }
             },
             max_tokens = 300
         });
 
-        yield return SendOpenAIRequest(openAIEndpoint, jsonRequestBody, onComplete);
+        yield return SendOpenAIRequest(openAIEndpoint, jsonRequestBody, response =>
+        {
+            // Debugging: Log the response from OpenAI
+            Debug.Log("OpenAI Response: " + response);
+            onComplete(response);
+        });
     }
 
     // Coroutine to generate speech from text and download the speech file
@@ -106,10 +112,12 @@ public class OpenAIService : MonoBehaviour
     }
 
     // Helper method to send OpenAI request
+    // Helper method to send OpenAI request
     private IEnumerator SendOpenAIRequest(string endpoint, string jsonRequestBody, System.Action<string> onComplete)
     {
         using (UnityWebRequest request = SetupUnityWebRequest(endpoint, jsonRequestBody))
         {
+
             yield return request.SendWebRequest();
 
             if (request.result == UnityWebRequest.Result.Success)
@@ -123,6 +131,8 @@ public class OpenAIService : MonoBehaviour
             }
             else
             {
+                // Log the error for debugging
+                Debug.LogError("OpenAI request failed: " + request.error);
                 onComplete(null);
             }
         }
