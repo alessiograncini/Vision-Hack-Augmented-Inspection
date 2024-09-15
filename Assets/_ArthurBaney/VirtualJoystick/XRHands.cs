@@ -215,7 +215,7 @@ public class XRHands : MonoBehaviour
                             startPinchPosition = pinchPositionLocal;
                             pinching = true;
                             pinchOffset = joystick.localPosition - pinchPositionLocal;
-                            follow.enabled = false;
+                            //follow.enabled = false;
                         }
 
                         //Instantiate(spawnObject, indexPOS, Quaternion.identity);
@@ -226,7 +226,7 @@ public class XRHands : MonoBehaviour
                 {
                     activeFlag = false;
                     pinching = false;
-                    follow.enabled = true;
+                    //follow.enabled = true;
                 }
             }
         }
