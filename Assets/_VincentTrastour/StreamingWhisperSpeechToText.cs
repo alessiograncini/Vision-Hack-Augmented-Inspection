@@ -206,29 +206,92 @@ public class StreamWhisperSpeechToText : MonoBehaviour
 
         var transcription = transcriptionTask.Result;
 
-        if (!string.IsNullOrEmpty(transcription))
+        Debug.Log("-=-=-====-=-=-=--=-=-=--=");
+        Debug.Log("Transcription:->" + transcription);
+        Debug.Log("-=-=-====-=-=-=--=-=-=--=");
+
+        if (!string.IsNullOrEmpty(transcription) && !transcription.Contains("BLANK_AUDIO"))
         {
             transcriptionText.text = "You said: " + transcription;
+
+            // Stop recording while processing the command or normal text response
+            StopRecording();
 
             StartCoroutine(openAIService.ParseUserInput(transcription, (parsedCommand) =>
             {
                 Debug.Log("Parsed Command: " + parsedCommand);
 
-                if (!string.IsNullOrEmpty(parsedCommand))
+                if (!string.IsNullOrEmpty(parsedCommand) && parsedCommand != "none")
                 {
                     commandExecutor.ExecuteCommand(parsedCommand);  // Execute the command
+                    // Resume recording after command execution
+                    StartCoroutine(ResumeRecordingAfterCommand());
                 }
                 else
                 {
-                    Debug.LogError("Parsed command is null or empty.");
-                    commandText.text = "No command detected.";
+                    // Handle normal text response
+                    StartCoroutine(openAIService.GetResponseForText(transcription, (response) =>
+                    {
+                        if (!string.IsNullOrEmpty(response))
+                        {
+                            StartCoroutine(openAIService.GenerateSpeech(response, "alloy", (audioClip) =>
+                            {
+                                if (audioClip != null)
+                                {
+                                    // Play the generated audio and block further input until done
+                                    AudioSource audioSource = openAIService.GetComponent<AudioSource>();
+                                    if (audioSource == null)
+                                    {
+                                        audioSource = openAIService.gameObject.AddComponent<AudioSource>();
+                                    }
+
+                                    audioSource.clip = audioClip;
+                                    audioSource.Play();
+
+                                    // Block further input until the audio is done playing
+                                    StartCoroutine(BlockInputUntilAudioComplete(audioSource));
+                                }
+                                else
+                                {
+                                    Debug.LogError("Failed to generate speech.");
+                                    // Resume recording if TTS fails
+                                    StartRecording();
+                                }
+                            }));
+                        }
+                        else
+                        {
+                            // Resume recording if no response
+                            StartRecording();
+                        }
+                    }));
                 }
             }));
         }
         else
         {
-            Debug.LogWarning("Transcription was empty.");
+            Debug.LogWarning("Transcription was empty or blank audio.");
+            // Resume recording if transcription is empty or blank audio
+            StartRecording();
         }
+    }
+
+    private IEnumerator BlockInputUntilAudioComplete(AudioSource audioSource)
+    {
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+        transcriptionText.text = "Press Start Listening to begin...";
+        // Resume recording after TTS playback is complete
+        StartRecording();
+    }
+
+    private IEnumerator ResumeRecordingAfterCommand()
+    {
+        // Wait for a short duration to ensure command execution is complete
+        yield return new WaitForSeconds(1.0f);
+        StartRecording();
     }
 
     // Asynchronous helper function to process audio with Whisper

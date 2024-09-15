@@ -13,7 +13,8 @@ public class OpenAIService : MonoBehaviour
     // Function to handle user input parsing
     public IEnumerator ParseUserInput(string userInput, System.Action<string> onComplete)
     {
-        string prompt = "You are a helpful assistant. Detect if there is a command in the user's message and respond accordingly. "
+        string prompt = "You are a helpful assistant. You are also a robot, a quadruped robot used for teleoperation and inspection."
+                        + "Detect if there is a command in the user's message and respond accordingly. "
                         + "Here is the list of the commands we are waiting for: "
                         + "'move forward', 'move backward', 'turn left', 'turn right', 'stop', 'tell me what you see', 'start', 'stop'. "
                         + "Answer with just one word so I can use that as a command detection. If there is no command, answer with 'none'."
@@ -136,6 +137,22 @@ public class OpenAIService : MonoBehaviour
                 onComplete(null);
             }
         }
+    }
+
+    public IEnumerator GetResponseForText(string userInput, System.Action<string> onComplete)
+    {
+        string jsonRequestBody = JsonConvert.SerializeObject(new
+        {
+            model = "gpt-4o-mini",
+            messages = new[]
+            {
+                new { role = "user", content = userInput }
+            },
+            max_tokens = 150,
+            temperature = 0.7
+        });
+
+        yield return SendOpenAIRequest(openAIEndpoint, jsonRequestBody, onComplete);
     }
 
     // Helper method to setup UnityWebRequest
