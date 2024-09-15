@@ -6845,7 +6845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e866898a7cb4ca682deddb21546296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openAIAPIKey: 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
+  openAIAPIKey: 
 --- !u!114 &1639844322
 MonoBehaviour:
   m_ObjectHideFlags: 0
