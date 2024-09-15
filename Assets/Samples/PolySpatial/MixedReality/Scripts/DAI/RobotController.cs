@@ -9,7 +9,8 @@ using System.Text;
 /// </summary>
 public class RobotController : MonoBehaviour
 {
-    private const string baseUrl = "http://192.168.4.38:5000"; // most likely spot IP address but make sure 
+    [SerializeField]
+    private string baseUrl = "http://192.168.4.38:5002"; // most likely spot IP address but make sure 
 
     [Header("Movement Settings")]
     [SerializeField] private float forwardSpeed = 1f;

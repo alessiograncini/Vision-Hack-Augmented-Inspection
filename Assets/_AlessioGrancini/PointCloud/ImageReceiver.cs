@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class ImageReceiver : MonoBehaviour
 {
-    private string serverUrl = "http://192.168.1.225:5002/get_frame";
+    [SerializeField]
+    private string serverUrl = "http://192.168.4.38:5002/get_frame";
     public float updateInterval = 0.1f; // Update every 0.1 seconds
     public RawImage displayImage;
 

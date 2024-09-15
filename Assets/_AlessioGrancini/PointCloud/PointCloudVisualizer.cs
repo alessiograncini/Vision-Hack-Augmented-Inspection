@@ -9,10 +9,13 @@ using Newtonsoft.Json.Linq;
 
 public class PointCloudVisualizer : MonoBehaviour
 {
+    [SerializeField]
     private ParticleSystem particleSystem;
+    
+    
     private ParticleSystem.Particle[] particles;
 
-    [SerializeField] private string serverUrl = "http://192.168.1.225:5001/get_point_cloud";
+    [SerializeField] private string serverUrl = "http://192.168.4.38:5001/get_point_cloud";
     [SerializeField] private float updateInterval = 0.1f;
     [SerializeField] private int maxParticles = 100000;
     [SerializeField] private float particleSize = 0.01f;
@@ -25,20 +28,25 @@ public class PointCloudVisualizer : MonoBehaviour
         StartCoroutine(UpdatePointCloudRoutine());
     }
 
+    [SerializeField]
+    //private ParticleSystem _particleSystem;
+
     private void SetupParticleSystem()
     {
-        particleSystem = gameObject.AddComponent<ParticleSystem>();
+        //particleSystem = gameObject.AddComponent<ParticleSystem>();
+        //particleSystem = _particleSystem;
         var main = particleSystem.main;
         main.loop = false;
         main.playOnAwake = false;
         main.maxParticles = maxParticles;
         main.simulationSpace = ParticleSystemSimulationSpace.Local;
-
         var emission = particleSystem.emission;
         emission.enabled = false;
 
         var shape = particleSystem.shape;
         shape.enabled = false;
+        /*
+      
 
         // Create and set up the particle material
         particleMaterial = new Material(Shader.Find("TextMeshPro/Mobile/Distance Field"));
@@ -48,6 +56,7 @@ public class PointCloudVisualizer : MonoBehaviour
         var renderer = particleSystem.GetComponent<ParticleSystemRenderer>();
         renderer.material = particleMaterial;
         renderer.renderMode = ParticleSystemRenderMode.Billboard;
+        */
 
         particles = new ParticleSystem.Particle[maxParticles];
         

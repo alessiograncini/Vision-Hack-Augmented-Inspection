@@ -112,7 +112,7 @@ public class StartCommand : ICommand
 public class LookAroundCommand : ICommand
 {
     private OpenAIService openAIService;
-    private string serverUrl = "http://192.168.1.225:5002/get_frame"; // Update this to match your server URL
+    private string serverUrl = "http://192.168.4.38:5002/get_frame"; // Update this to match your server URL
 
     public LookAroundCommand(OpenAIService service)
     {
