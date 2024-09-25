@@ -3,6 +3,11 @@
 
 ![AR Cover Image](Cover/cover_image.png)
 
+## 🏆Winners🏆 
+
+Winner for the category "Productivity and Utility" at Vision Hack Hackathon 09/13-15/2024 
+https://www.visionoshackathon.com/
+
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
